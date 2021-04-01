@@ -16,7 +16,9 @@ CREATE TABLE `Account`(
 	DepartmentID		INT,
     PositionID 			INT,
     CreateDate			DATE,
-    PRIMARY KEY 		(AccountID));
+    PRIMARY KEY 		(AccountID),
+    FOREIGN KEY 		(DepartmentID) 	REFERENCES Department(DepartmentID),
+    FOREIGN KEY 		(PositionID) 	REFERENCES `Position`(PositionID));
 CREATE TABLE `GROUP`(
 	GroupID				INT NOT NULL AUTO_INCREMENT,
     GroupName			VARCHAR(50),
@@ -26,7 +28,9 @@ CREATE TABLE `GROUP`(
 CREATE TABLE GroupAccount(
 	GroupID				INT,
     AccountID			INT,
-    JoinDate			DATE);
+    JoinDate			DATE,
+    FOREIGN KEY 		(GroupID)	REFERENCES	`GROUP`(GroupID),
+    FOREIGN KEY 		(AccountID)	REFERENCES	`Account`(AccountID));
 CREATE TABLE TypeQuestion(
 	TypeID				INT AUTO_INCREMENT NOT NULL,
     TypeName			VARCHAR(500),
@@ -42,13 +46,16 @@ CREATE TABLE Question(
     TypeID				INT,
     CreatorID			INT,
     CreateDate			DATE,
-    PRIMARY KEY			(QuestionID));
+    PRIMARY KEY			(QuestionID),
+    FOREIGN KEY			(CategoryID) 	REFERENCES CategoryQuestion(CategoryID),
+    FOREIGN KEY 		(TypeID)		REFERENCES TypeQuestion(TypeID));
 CREATE TABLE Answer(
 	AnswerID			INT NOT NULL AUTO_INCREMENT,
     Content				VARCHAR(500),
     QuestionID			INT,
     isCorrect			BOOL,
-    PRIMARY KEY			(AnswerID));
+    PRIMARY KEY			(AnswerID),
+    FOREIGN KEY 		(QuestionID)	REFERENCES Question(QuestionID));
 CREATE TABLE Exam(
 	ExamID				INT NOT NULL AUTO_INCREMENT,
     `Code`				VARCHAR(20),
@@ -57,7 +64,10 @@ CREATE TABLE Exam(
     Duration			TIME,
     CreatorID			INT,
     CreateDate			DATE,
-    PRIMARY KEY 		(ExamID));
+    PRIMARY KEY 		(ExamID),
+    FOREIGN KEY			(CategoryID) 	REFERENCES CategoryQuestion(CategoryID));
 CREATE TABLE ExamQuestion(
 	ExamID				INT,
-    QuestionID			INT);
+    QuestionID			INT,
+    FOREIGN KEY 		(ExamID)		REFERENCES Exam(ExamID),
+    FOREIGN KEY 		(QuestionID)	REFERENCES Question(QuestionID));
