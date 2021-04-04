@@ -61,7 +61,7 @@ CREATE TABLE Exam(
     `Code`				VARCHAR(20),
     Title				VARCHAR(200),
     CategoryID			INT,
-    Duration			TIME,
+    Duration			INT,
     CreatorID			INT,
     CreateDate			DATE,
     PRIMARY KEY 		(ExamID),
