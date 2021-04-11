@@ -17,7 +17,7 @@ FROM `account`;
 
 -- Question 5: Lấy ra thông tin account có full name dài nhất và thuộc phòng ban có id = 3
 SELECT 
-	*, MAX(LENGTH(FullName))
+	*, MAX(CHAR_LENGTH(FullName))
 FROM `account`
 WHERE DepartmentID = 3;
 
@@ -57,7 +57,7 @@ SELECT
 	DepartmentID, COUNT(AccountID)
 FROM `account`
 GROUP BY DepartmentID
-HAVING COUNT(AccountID) AND DepartmentID = 5;
+HAVING COUNT(AccountID) AND DepartmentID = 2;
 
 -- Question 11: Lấy ra nhân viên có tên bắt đầu bằng chữ "D" và kết thúc bằng chữ "o"
 SELECT
